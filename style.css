@@ -790,7 +790,7 @@
     }
 
     .review {
-        width: auto;
+        width: min(360px, 100%);
     }
 
     .review__content {
