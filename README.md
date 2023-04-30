@@ -1,7 +1,7 @@
 <h1 align="center">Frontend Mentor - Fylo Landing Page Solution</h1>
 
 <div align="center"><a href="https://www.frontendmentor.io/challenges/fylo-landing-page-with-two-column-layout-5ca5ef041e82137ec91a50f5">This Challenge on Frontend Mentor</a></div>
-<div align="center"><a href="https://hiozen.github.io/fylo-landing-page/">Live Preview</a></div>
+<div align="center"><a href="https://amortise.github.io/fm-fylo-landing-page-design/">Live Preview</a></div>
 
 <h2 align="center">Built with</h2>
 
