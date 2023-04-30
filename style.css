@@ -13,6 +13,7 @@
     --Light-Grayish-Blue: hsl(240, 75%, 98%);
     --Light-Grayish-Blue-v2: #F8F8FE;
     --Light-Gray: hsl(0, 0%, 75%);
+
     --White: hsl(0, 0%, 100%);
     --Black: hsl(0, 0%, 0%);
     --Black-Opacity: hsla(0, 0%, 0%, 0.15);
@@ -21,6 +22,9 @@
 
     --Primary-Margin-Inline: 5rem;
     --Negative-Primary-Margin-Inline: calc(var(--Primary-Margin-Inline) * -1);
+
+    --transition: 200ms;
+    --primary-header-fs: 2.5rem;
 }
 
 /* --------------------------------------------------------Default */
@@ -81,6 +85,13 @@
     margin-bottom: 6rem;
 }
 
+.header__navigation,
+.header__list,
+.header__item,
+.header__link {
+    height: 100%;
+}
+
 .header__logo {
     display: block;
 }
@@ -93,15 +104,34 @@
 }
 
 .header__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+
     text-decoration: none;
 
     color: var(--Very-Dark-Blue);
 
-    transition: color 200ms;
+    transition: color var(--transition);
 }
 
 .header__link:is(:hover, :focus-visible) {
     color: var(--Bright-Blue);
+}
+
+.header__link::after {
+    content: "";
+    position: absolute;
+    inset: auto 50% 0 50%;
+    height: 2px;
+
+    background-color: var(--Bright-Blue);
+
+    transition: inset var(--transition);
+}
+
+.header__link:is(:hover, :focus-visible)::after {
+    inset: auto 0 0 0;
 }
 
 /* --------------------------------------------------------Main */
@@ -129,7 +159,7 @@
 }
 
 .get-started__header {
-    font-size: 2.5rem;
+    font-size: var(--primary-header-fs);
     line-height: 1.5;
 
     color: var(--Very-Dark-Blue);
@@ -151,6 +181,10 @@
 .get-started__form-wrapper {
     position: relative;
     width: 53%;
+}
+
+.get-started__form:has(.get-started__input--error) {
+    gap: 2rem 1rem
 }
 
 .get-started__input {
@@ -202,7 +236,7 @@
     box-shadow: 3px 3px 10px -2px var(--Light-Gray);
 
     cursor: pointer;
-    transition: opacity 200ms;
+    transition: opacity var(--transition);
 }
 
 .get-started__button:is(:hover, :focus-visible) {
@@ -247,7 +281,7 @@
 }
 
 .description__header {
-    font-size: 2.5rem;
+    font-size: var(--primary-header-fs);
     margin-bottom: 1rem;
 
     color: var(--Very-Dark-Blue);
@@ -277,7 +311,7 @@
     border-bottom-width: 1px;
     border-bottom-color: var(--Moderate-Cyan);
 
-    transition: opacity 200ms;
+    transition: opacity var(--transition);
 }
 
 .description__link:hover {
@@ -457,7 +491,7 @@
     box-shadow: 3px 3px 5px var(--Black-Opacity);
 
     cursor: pointer;
-    transition: filter 200ms;
+    transition: filter var(--transition);
 }
 
 .get-access__button:is(:hover, :focus-visible) {
@@ -517,7 +551,7 @@
 
     color: var(--Light-Grayish-Blue);
 
-    transition: color 100ms;
+    transition: color calc(var(--transition) / 2);
 }
 
 .footer__link:is(:hover, :focus-visible) {
@@ -540,7 +574,7 @@
     filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(138deg) brightness(104%) contrast(101%);
 
     pointer-events: none;
-    transition: filter 100ms;
+    transition: filter calc(var(--transition) / 2);
 }
 
 .footer__svg--reverse {
@@ -571,7 +605,7 @@
 
     color: var(--White);
 
-    transition: color 200ms;
+    transition: color var(--transition);
 }
 
 .attribution__link:is(:hover, :focus-visible) {
@@ -595,7 +629,6 @@
 @media screen and (max-width: 1200px) {
     .get-started__form {
         flex-direction: column;
-        gap: 2rem;
     }
 
     .get-started__form-wrapper {
@@ -749,17 +782,27 @@
 }
 
 @media screen and (max-width: 600px) {
+    :root {
+        --primary-header-fs: 1.75rem;
+    }
+
+    .header__list {
+        gap: 1rem;
+    }
+
     .get-started {
         margin-bottom: 3rem;
+        gap: 6rem;
     }
 
     .get-started__header {
-        font-size: 1.3rem;
-        line-height: 1.5;
+        line-height: 1.25;
     }
 
-    .get-started__desc {
-        padding-inline: 1rem;
+    .get-started__desc,
+    .description__p,
+    .get-access__desc {
+        padding: 0;
         font-size: .9rem;
     }
 
@@ -774,15 +817,6 @@
     .get-started__button {
         width: 100%;
         padding: 1.2em 2em;
-    }
-
-    .description__header {
-        font-size: 1.3rem;
-    }
-
-    .description__p {
-        padding-inline: 1rem;
-        font-size: .9rem;
     }
 
     .description__link {
@@ -804,11 +838,6 @@
 
     .get-access__header {
         font-size: 1.5rem;
-    }
-
-    .get-access__desc {
-        padding-inline: 1rem;
-        font-size: .85rem;
     }
 
     .footer {
